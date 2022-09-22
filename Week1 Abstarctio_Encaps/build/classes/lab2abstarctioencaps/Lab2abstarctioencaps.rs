@@ -1,0 +1,3 @@
+lab2abstarctioencaps.Animal
+lab2abstarctioencaps.Pig
+lab2abstarctioencaps.Main
