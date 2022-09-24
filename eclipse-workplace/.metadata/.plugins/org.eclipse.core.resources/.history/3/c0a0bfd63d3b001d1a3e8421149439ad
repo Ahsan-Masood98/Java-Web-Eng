@@ -1,0 +1,96 @@
+package com.ahsan;
+
+import java.io.IOException;
+import java.io.PrintWriter;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.List;
+
+import javax.servlet.RequestDispatcher;
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import com.ahsan.entity.user_details;
+
+/**
+ * Servlet implementation class helloworld
+ */
+
+
+@WebServlet("/helloworld")
+public class helloworld extends HttpServlet {
+	private static final long serialVersionUID = 1L;
+	private List<user_details> list = new ArrayList();
+    /**
+     * Default constructor. 
+     */
+    public helloworld() {
+        // TODO Auto-generated constructor stub
+    }
+
+	/**
+	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
+	 */
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		// TODO Auto-generated method stub
+		response.getWriter().append("Served at: ").append(request.getContextPath());
+		
+		//To Show Data on JSP
+		String destination ="index.jsp";
+		RequestDispatcher requestDispatcher = request.getRequestDispatcher(destination);
+		String name = "Ahsan Masood";
+		request.setAttribute("name", name);
+		String course = "JAVA Web";
+		request.setAttribute("course", course);
+		requestDispatcher.forward(request, response);
+		// or request.getRequestDispatcher("index.js").forward(request, response);
+		
+		//To Show Data on Servlet
+		response.setContentType("Text/HTML");
+		String email = request.getParameter("email");
+		String username = request.getParameter("username");
+		String password = request.getParameter("password");
+		String action = request.getParameter("action");
+		String id = request.getParameter("id");
+		
+		PrintWriter out = response.getWriter();
+		out.println("<h1> Email: " + email + "</h1> <br/> <h1> Username: " + username + "</h1> <br/>");
+		
+		//TO CONNCET TO MYSQL
+		//FIRST Step CREATE CLASS PATH
+		// connection stable kerain gay
+		// query declare kerain gay
+		//4rth statment execute kersin gay
+		//
+		try {
+			Class.forName("com.mysql.cj.jdbc.driver");
+			Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/bootcamp_lab3","root","root");
+			String query ="select * from user_detils";
+			Statement st = con.createStatement();
+			ResultSet rs = st.executeQuery(query);
+			while(rs.next()) {
+				list.add(new user_details(Integer.parseInt(rs.getString("user_id")), rs.getString("userName"), rs.getString("Email_address"),rs.getString("password")))
+			}
+		} catch (ClassNotFoundException | SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+
+	/**
+	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+	 */
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		// TODO Auto-generated method stub
+		doGet(request, response);
+		
+	}
+
+}

@@ -1,0 +1,77 @@
+package com.ahsan;
+
+import java.io.IOException;
+import java.io.PrintWriter;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.SQLException;
+
+import javax.servlet.RequestDispatcher;
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+/**
+ * Servlet implementation class helloworld
+ */
+public class user_detail{
+	private int user_id;
+private String userName;
+private String Email_address;
+private String password;
+}
+@WebServlet("/helloworld")
+public class helloworld extends HttpServlet {
+	private static final long serialVersionUID = 1L;
+
+    /**
+     * Default constructor. 
+     */
+    public helloworld() {
+        // TODO Auto-generated constructor stub
+    }
+
+	/**
+	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
+	 */
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		// TODO Auto-generated method stub
+		response.getWriter().append("Served at: ").append(request.getContextPath());
+		String destination ="index.jsp";
+		RequestDispatcher requestDispatcher = request.getRequestDispatcher(destination);
+		String name = "Ahsan Masood";
+		request.setAttribute("name", name);
+		String course = "JAVA Web";
+		request.setAttribute("course", course);
+		requestDispatcher.forward(request, response);
+		// or request.getRequestDispatcher("index.js").forward(request, response);
+		response.setContentType("Text/HTML");
+		String email = request.getParameter("email");
+		String username = request.getParameter("username");
+		String password = request.getParameter("password");
+		PrintWriter out = response.getWriter();
+		out.println("<h1> Email: " + email + "</h1> <br/> <h1> Username: " + username + "</h1> <br/>");
+		//TO CONNCET TO MYSQL
+		//FIRST CREATE CLASS PATH 
+	
+		try {
+			Class.forName("com.mysql.cj.jdbc.driver");
+			Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/bootcamp_lab3","root","root");
+		} catch (ClassNotFoundException | SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+
+	/**
+	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+	 */
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		// TODO Auto-generated method stub
+		doGet(request, response);
+		
+	}
+
+}

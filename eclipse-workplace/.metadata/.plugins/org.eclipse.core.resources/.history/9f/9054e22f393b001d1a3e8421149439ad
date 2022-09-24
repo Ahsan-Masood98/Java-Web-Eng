@@ -1,0 +1,9 @@
+package com.ahsan.entity;
+
+//POJO CLASS: Plain Old Java Object
+public class user_details {
+	private int user_id;
+	private String Email_address;
+	private String userName;
+	private String password;
+}

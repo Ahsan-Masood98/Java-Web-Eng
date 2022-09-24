@@ -1,0 +1,5 @@
+package com.ahsan.entity;
+
+public class user_details {
+
+}
