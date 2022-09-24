@@ -1,5 +1,0 @@
-INDEX VERSION 1.131
-C:\Users\Ahsan PC\Desktop\Projects\eclipse-workplace\.metadata\.plugins\org.eclipse.jst.jsp.core\jspsearch\2583821982.index
-\week2lab\src\main\java
-C:\Users\Ahsan PC\Desktop\Projects\eclipse-workplace\.metadata\.plugins\org.eclipse.jst.jsp.core\jspsearch\657739190.index
-\Week3Lab\src\main\java
